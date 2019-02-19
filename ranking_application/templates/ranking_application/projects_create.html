@@ -1,0 +1,36 @@
+{% extends 'ranking_application/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Create new project{% endblock title %}
+{% url 'home' as url%}
+
+{% block pagetitle %}Create new Requirements Prioritization Project{% endblock %}
+{% block sidenav %}
+      <div class="col-sm-2 sidenav">
+      <h4>Subnavigation projects</h4>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="{% url 'projects_create' %}">Create new RP-Project</a></li>
+      </ul>
+    </div>
+        {% endblock %}
+{% block content %}
+<form action="{% url 'projects_create'  %}" method="POST">{% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="form-group">
+        {{ form.project_title.errors }}
+        <label for="{{ form.project_title.id_for_label }}">Project title: </label>
+        {{ form.project_title | add_class:'form-control' | attr:"placeholder:Enter project title"}}
+    </div>
+    <div class="form-group">
+        {{ form.project_description.errors }}
+        <label for="{{ form.project_description.id_for_label }}">Project description: </label>
+        {{ form.project_description | add_class:'form-control' | attr:"rows:3" | attr:"placeholder:Enter project description"}}
+    </div>
+    <div class="form-group">
+        {{ form.criteria.errors }}
+        <label for="{{ form.criteria.id_for_label }}">Relevant criteria</label>
+        {{ form.criteria | add_class:'form-control'}}
+    </div>
+    <input type="submit" value="Save">
+</form>
+{% endblock content %}

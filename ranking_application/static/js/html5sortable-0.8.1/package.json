@@ -1,0 +1,79 @@
+{
+  "name": "html5sortable",
+  "main": "dist/html5sortable.js",
+  "file": "src/html5sortable.ts",
+  "dist": "dist",
+  "version": "0.8.1",
+  "license": "MIT",
+  "description": "VanillaJS sortable lists and grids using native HTML5 drag and drop API.",
+  "author": {
+    "name": "Lukas Oppermann",
+    "email": "lukas@vea.re",
+    "url": "http://vea.re"
+  },
+  "keywords": [
+    "sortable",
+    "html5",
+    "drag and drop"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/lukasoppermann/html5sortable"
+  },
+  "bugs": {
+    "url": "http://github.com/lukasoppermann/html5sortable/issues"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.1.4",
+    "coveralls": "^3.0.0",
+    "eslint": "^4.18.1",
+    "eslint-plugin-typescript": "^0.10.0",
+    "jest": "^22.4.2",
+    "requirejs": "^2.3.5",
+    "rollup": "^0.56.0",
+    "rollup-plugin-strip-code": "^0.2.5",
+    "rollup-plugin-typescript": "^0.8.1",
+    "rollup-plugin-uglify": "^3.0.0",
+    "rollup-watch": "^4.3.1",
+    "snazzy": "^7.0.0",
+    "standard": "^11.0.0",
+    "ts-jest": "^22.4.0",
+    "typescript": "^2.7.2",
+    "typescript-eslint-parser": "^14.0.0"
+  },
+  "jest": {
+    "collectCoverage": false,
+    "collectCoverageFrom": [
+      "src/*.ts"
+    ],
+    "notify": true,
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.ts?$": "ts-jest"
+    },
+    "testMatch": [
+      "**/__tests__/**/*.test.(ts|js)"
+    ]
+  },
+  "standard": {
+    "parser": "typescript-eslint-parser",
+    "plugins": [
+      "typescript"
+    ]
+  },
+  "scripts": {
+    "jest": "jest",
+    "test": "jest && npm run standard",
+    "coverage": "jest --coverage && npm run standard",
+    "build": "rollup -c && cp $npm_package_main docs/html5sortable.js",
+    "standard": "standard 'src/*.ts' '__tests__/*.ts' | snazzy",
+    "travis": "npm run cover && npm run standard",
+    "cover": "jest --colors --coverage --coverageReporters=text-lcov | coveralls",
+    "preversion": "npm test",
+    "version": "npm run build && git add -A dist docs",
+    "postversion": "git push && git push --tags"
+  }
+}

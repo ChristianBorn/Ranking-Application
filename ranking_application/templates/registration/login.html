@@ -1,0 +1,22 @@
+{% extends 'ranking_application/base.html' %}
+
+{% block title %}Login{% endblock %}
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+<p class="{{ message.tags }}">{{ message }}</p>
+{% endfor %}
+{% endif %}
+  {% if not user.is_authenticated %}
+    <h2>Login</h2>
+    <h2>{{ next_page }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+  {% else %}
+    <h2>You are already logged in.</h2>
+    <a href="{% url 'home' %}">Take me back to the dashboard</a>
+  {% endif %}
+{% endblock %}

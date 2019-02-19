@@ -1,0 +1,14 @@
+{% extends 'ranking_application/base.html' %}
+{% block title %}Dashboard{% endblock title %}
+{% url 'home' as url%}
+
+{% block pagetitle %}Dashboard{% endblock %}
+{% block content %}
+<p>Welcome back, {{ user.get_full_name }}!</p>
+<p>Your role: {{ user.app_user.get_role_display }}</p>
+{% if not active_project %}
+<p>No active project</p>
+{% else %}
+<p>Active project: <strong>{{ active_project }}</strong></p>
+{% endif %}
+{% endblock content %}

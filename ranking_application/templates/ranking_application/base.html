@@ -1,0 +1,56 @@
+{# HTML5 declaration #}
+{% load staticfiles %}
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+
+        <link rel="stylesheet" href="{% static 'css/ranking_application.css' %}">
+                <script type="text/javascript" src="{% static 'js/ranking_application.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+        <style>
+  </style>
+    </head>
+
+<body>
+
+{% if user.is_authenticated %}
+    {% block navigation %}
+        {% if user.app_user.get_role == 'PM' %}
+        {% include "ranking_application/navigation_pm.html" %}
+        {% else %}
+        {% include "ranking_application/navigation_other.html" %}
+        {% endif %}
+    {% endblock %}
+{% endif %}
+<!-- Modal -->
+
+<div class="container-fluid">
+  <div class="row content">
+      {% if user.is_authenticated %}
+        {% block sidenav %}
+
+        {% endblock %}
+      {% endif %}
+    {% if request.session.active_project %}
+        <aside class="project-indicator">{{request.session.active_project}}</aside>
+        {% endif %}
+      <div class="col-sm-10">
+      <h3>{% block pagetitle %}{% endblock %}</h3>
+
+        {% block content %}{% endblock %}
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid">
+  <p>© Christian Born & Vasilis Gerogiannis</p>
+</footer>
+</body>
+</html>

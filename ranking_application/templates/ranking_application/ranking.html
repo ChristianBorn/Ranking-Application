@@ -1,0 +1,127 @@
+{% extends 'ranking_application/base.html' %}
+{% load my_filters %}
+{% block title %}Ranking of requirements{% endblock title %}
+
+{% block pagetitle %}Ranking of requirements{% endblock %}
+{% block sidenav %}
+{% if user.app_user.get_role != 'PM' %}
+      <div class="col-sm-2 sidenav">
+      <h4>Subnavigation rankings</h4>
+      <ul class="nav nav-pills nav-stacked">
+
+          <li class=""><a href="{% url 'rank_requirements' %}">Start ranking</a></li>
+
+      </ul>
+    </div>{% endif %}
+{% endblock %}
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+<p class="{{ message.tags }}">{{ message }}</p>
+{% endfor %}
+
+{% endif %}
+<p>Your role: {{ user.app_user.get_role_display }}</p>
+{% if user.app_user.get_role == 'PM' %}
+{% if assigned_users %}
+<div class="col-sm-12 item-display">
+    <div class="col-sm-3">
+    <h4>Users assigned to project</h4>
+        <ol>
+        {% for user in assigned_users %}
+    <li>{{user.username}}
+    {% if finished_rankings|lookup:user|check_complete:project_requirements %}
+        <span style="color: green;" class="glyphicon glyphicon-ok"></span>
+        {% else %}
+            <span style="color: red;" class="glyphicon glyphicon-remove"></span>
+            {% endif %}
+    </li>
+
+    {% endfor %}
+
+        </ol>
+        </div>
+        {% if rankings_complete and project_requirements %}
+
+        <div class="col-sm-4">
+            <a style="margin-top: 20px;" role="button" href="{% url 'final_ranking' %}" class="btn btn-lg btn-success">Final ranking</a>
+        {% endif %}
+
+    </div>
+
+    <div class="col-sm-12">
+        {% if finished_rankings|check_empty %}
+        <h4>Registered complete rankings</h4>
+        {% endif %}
+        {% for key, values in finished_rankings2.items %}
+        {% if values|check_complete:project_requirements %}
+    <table class="table individual-rankings">
+            <thead>
+            {% if criteria %}
+            <tr><td>Criterion: <strong>{{ criteria|lookup:key }}</strong></td>
+            <td style="position: absolute; right:20%;"><strong>Intuitionistic fuzzy numbers</strong></td>
+            </tr>
+            {% endif %}
+            <tr>
+                <th scope="col" class="col-sm-1">{{key.username}}</th>
+      <th scope="col" class="col-sm-1">Requirement title</th>
+      <th scope="col" class="col-sm-1">Rank</th>
+                <th scope="col" class="col-sm-1">Membership degree</th>
+                <th scope="col" class="col-sm-1">Non-membership degree</th>
+                <th scope="col" class="col-sm-1">Hesitation degree</th>
+    </tr>
+
+            </thead>
+            <tbody>
+
+            {% for ranking in values %}
+            <tr>
+                <td></td>
+            <td>{{ ranking.requ_name }}</td>
+                <td>{{ ranking.rank }}</td>
+                <td>{{ ranking.membership|round_decimal }}</td>
+                <td>{{ ranking.nonmembership|round_decimal }}</td>
+                <td>{{ ranking.hesitation|round_decimal }}</td>
+    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+{% endif %}
+        {% endfor %}
+
+    </div>
+    </div>
+{% else %}
+<strong>There are no users assigned to the current project.</strong>
+{% endif %}
+{% else %}
+<p>This view shows the requirements to be ranked by you.</p>
+{% if project_requirements %}
+<div class="col-sm-12 item-display">
+    <div class="row col-sm-12">
+    {% for requirement in project_requirements %}
+
+    <div class="col col-sm-3 jumbotron single-item">
+            <small>Req.-ID: {{ requirement.id_in_project }}</small>
+            <h3 class="display-5">{{ requirement }}</h3>
+            <small>{{ requirement.description }}</small>
+            <hr>
+                {% if user.app_user.get_role == 'PM' %}
+                <a class="btn btn-primary btn-sm" href="{% url 'edit_requirement' requirement.pk %}" role="button">Edit</a>
+                <a class="btn btn-danger btn-sm" onclick="confirmation('{% url 'delete_requirement' requirement.pk %}')"
+                   href="#" role="button">Delete</a>
+                {% endif %}
+    </div>
+        {% if forloop.counter|divisibleby:3 %}
+    </div>
+    <div class="row col-sm-12">
+         {% endif %}
+    {% endfor %}
+
+    </div></div>
+{% else %}
+<strong>There are no requirements available in the current project.</strong>
+{% endif %}
+{% endif %}
+{% endblock content %}

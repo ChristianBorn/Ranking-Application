@@ -1,0 +1,125 @@
+/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+
+.item-display {
+    background-color: #F0F8FF;
+    padding: 20px;
+}
+
+.single-item {
+    margin-right: 5%;
+    border: 1px solid #A9A9A9;
+    word-wrap: break-word;
+}
+.single-item:hover, .single-project:focus {
+    background-color: #DCDCDC;
+}
+
+.active-project {
+    border: 1px solid #228B22;
+    border-left: 5px solid #228B22;
+}
+
+.success {
+    color: green;
+    font-weight: bold;
+}
+
+.project-indicator {
+    position: absolute;
+    right: 1%;
+    top: 13%;
+    padding: 10px;
+    border: 1px solid #228B22;
+    border-left: 5px solid #228B22;
+}
+  #unordered{
+    border: 1px solid black;
+
+    min-height: 20px;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 0 0;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 50px;
+  }
+  #ordered {
+    border: 1px solid black;
+
+    min-height: 20px;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 0 0;
+    float: left;
+    margin-right: 10px;
+  }
+    #unsure{
+    border: 1px solid black;
+
+    min-height: 20px;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 0 0;
+    float: right;
+    margin-right: 10px;
+  }
+  #unordered li, #ordered li, #unsure li {
+    margin: 0 5px 5px 5px;
+    min-width: 15em;
+    padding: 5px;
+    font-size: 1.2em;
+    width: 120px;
+    background-color: #eee;
+    border: 1px solid #A9A9A9;
+  }
+  #unordered li:hover, #unordered li:focus, #ordered li:hover, #ordered li:focus, #unsure li:hover, #unsure li:focus {
+    background-color: #DCDCDC;
+}
+.empty {
+    opacity: 0;
+    margin: 0 5px 5px 5px;
+    min-width: 15em;
+    padding: 5px;
+    font-size: 1.2em;
+    width: 120px;
+}
+.ui-state-highlight { height: 1.5em; line-height: 1.2em; }
+.error {
+    font-weight: bold;
+    color: red;
+}
+.individual-rankings thead tr th {
+    min-width : 165px;
+}
+.glyphicon-warning-sign {
+    color: orangered;
+    font-size: 18px;
+}
+.explanation-pic {
+    max-width: 700px;
+    float: right;
+    margin-left: 10px;
+}

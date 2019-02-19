@@ -1,0 +1,167 @@
+{% extends 'ranking_application/base.html' %}
+{% load my_filters %}
+{% load staticfiles %}
+{% block title %}User Guide{% endblock title %}
+
+{% block pagetitle %}User Guide{% endblock %}
+{% block content %}
+<p>This user guide aims to explain how the system works. The explanations will follow a fictional case study to describe
+    the steps one by one.</p>
+<h3>The case</h3>
+<p>The requirements prioritization (RP) case study aims to prioritize the requirements of a hypothetical
+    commercial company's marketing portal that provides registered company's
+    customers with information about the company's products. This project
+    executed in a distributed development context where the team of
+    stakeholders involved in RP consisted of three individuals, namely the
+    <strong>project owner</strong>, a <strong>senior software engineer</strong> and a <strong>customer
+        representative</strong>.</p>
+
+<p>In the next development sprint of the marketing portal case study, four
+    functional requirements are elicited to be prioritized. Their
+    descriptions, in a high-level form, are: (i) "a registered customer
+    uses the portal to issue an order for a company's product", (ii) "a
+    non-registered customer uses to portal to download product brochures and
+    catalogues", (iii) "a registered customer uses the portal to create and
+    send to the company a direct mail asking information about a specific
+    product" and (iv) "a registered customer uses the portal to write
+    comments for a company's product". </p>
+
+<p>The following three prioritization criteria are identified by the
+    project manager in the marketing portal case study, namely: </p>
+
+<p>(i) "importance, i.e. the value of a requirement with regard to the
+    portal customers and the marketing position of the company". The four
+    requirements will be ranked according to their importance by the
+    <strong>customer representative</strong>. </p>
+
+<p>(ii) "duration, i.e. the time needed to implement the requirement". The
+    four requirements will be ranked according to their importance by The
+    four requirements will be ranked according to their duration by the
+    <strong>senior software engineer</strong>. </p>
+
+<p>(iii) "damage, i.e., the extend of disadvantage that would result from
+    neglecting the requirement". The four requirements will be ranked
+    according to their damage by the <strong>project owner</strong>.</p>
+<h3>As project manager</h3>
+<h4>Creating a project</h4>
+<p>First the project needs to be created. An overview of all projects created by the current project manager can be
+    found under <a href="{% url 'projects' %}">Projects</a>. Here you can choose the project you want to work on
+    currently.</p><figure class="explanation-pic"><a target="_blank" href="{% static 'pics/create_projects.png' %}"><img class="explanation-pic"
+                                                                                         src="{% static 'pics/create_projects.png' %}"></a><figcaption><i>Form for creating projects</i></figcaption></figure>
+<p>The form under <a href="{% url 'projects_create' %}">Create new Project</a> gives you the opportunity to create a new
+    project. You have to specify the title and a short description of the project. Furthermore, you have to choose
+    criteria according to which the users will rank the requirements later. An explanation of the criteria can be found
+    in the table below.</p>
+<p><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> Please note that the criteria used in a
+    project cannot be changed once the project is created.</p>
+<table class="table">
+    <thead>
+    <tr>
+        <td><strong>Criterion</strong></td>
+        <td><strong>Description</strong></td>
+    </tr>
+    </thead>
+    <tr>
+        <td>Importance</td>
+        <td>"Importance" can consider different aspects of requirements. Examples would be the urgency of implementing
+            it, strategic importance or the importance to the customer.
+        </td>
+    </tr>
+    <tr>
+        <td>Cost</td>
+        <td>"Cost" refers to the financial resources needed to implement a requirement. It usually depends on the
+            complexity of the implementation and efforts needed for quality assurance. Other factors can also be the
+            degree of reuse and the extent of documentation needed.
+        </td>
+    </tr>
+    <tr>
+        <td>Damage</td>
+        <td>"Damage" describes the extent of damage or disadvantage resulting of neglecting the implementation of the
+            requirement. Examples can be contract penalties, reduced sales potential or instability of the system.
+        </td>
+    </tr>
+    <tr>
+        <td>Duration</td>
+        <td>The "Duration" requirement refers to the time needed to implement the requirement.</td>
+    </tr>
+    <tr>
+        <td>Risk</td>
+        <td>"Risk" includes the risk that is involved when realising the requirement. Examples of risked damages would
+            be exceeding the time schedule, resulting instabilities or low performance to the system, not satisfying the
+            customer or even the failure of the project.
+        </td>
+    </tr>
+    <tr>
+        <td>Volatility</td>
+        <td>"Volatility" refers to the probability of changes to the requirement in the course of the project.
+            Requirements with high volatility usually increase the development cost because changes have to be
+            considered when designing the architecture of the system. Therefore it must be designed with a higher degree
+            of flexibility which typically increases the complexity.
+        </td>
+    </tr>
+
+</table>
+<h4>Creating requirements</h4><figure class="explanation-pic"><a target="_blank" href="{% static 'pics/create_requirement.png' %}"><img class="explanation-pic"
+                                                                                         src="{% static 'pics/create_requirement.png' %}"></a><figcaption><i>Creation of requirements</i></figcaption></figure>
+<p>After creating the project and setting it as the active project, requirements need to be created. These requirements
+    will later be rated by the users assigned to the project. An overview of all already created requirements can be
+    found under <a href="{% url 'requirements' %}">Requirements</a>. Creating new requirements is simple. </p>
+<p>Under <a href="{% url 'requirements_create' %}">Create new Requirement</a> you have to give the requirement a title
+    and a short description. After creating it, the requirement will appear in the overview.</p>
+
+<h4>Assigning users</h4><figure class="explanation-pic"><a target="_blank" href="{% static 'pics/assign_users.png' %}"><img class="explanation-pic"
+                                                                                         src="{% static 'pics/assign_users.png' %}"></a><figcaption><i>Assigning of users</i></figcaption></figure>
+<p>In order to get rankings for the requirements created you need to assign users to your project. This can be done
+    under <a href="{% url 'users_assign' %}">Assign Users to active Project</a>.</p>
+<p>You can choose one or more users from the pool of registered users. An overview of all users assigned to the
+    currently active project can be found under <a href="{% url 'users' %}">Users</a>. There you can also unassign
+    users.</p>
+
+<h4>Getting the final prioritization</h4><figure class="explanation-pic"><a target="_blank" href="{% static 'pics/final_rank.png' %}"><img  class="explanation-pic"
+                                                                                         src="{% static 'pics/final_rank.png' %}"></a>
+    <figcaption><i>Final prioritization</i></figcaption></figure>
+
+<p>The final prioritization for the requirements can only be displayed if all assigned users have completed their
+    rankings. An overview of the given rankings can be found under <a href="{% url 'ranking' %}">Ranking</a>. The view
+    contains information on wether or not a user has completed the ranking. </p>
+<p>Additionally, if there are rankings, every ranking is displayed alongside withe the criterion according to which the
+    ranking was carried out. The tables for each ranking also shows the intutionistic fuzzy numbers that were calculated
+    based on the given ranking of requirements.</p>
+<p>As soon as all users completed the ranking of requirements, the final prioritization is accessible under <a
+        href="{% url 'final_ranking' %}">Final Prioritization</a>. This view shows the prioritization together with the
+    scores of each requirement. Further information is given on the calculated weights and hesitation values for the
+    individual rankings. For a more pleasant presentation the requirements and their scores are visualized in a
+    barchart.</p>
+<h3>As normal user</h3>
+<p>All users except for the project manager are considered "normal" users. They are assigned to projects in order to
+    rank the respective requirements according to a criterion of their choice.</p>
+<h4>Choosing a project</h4>
+<p>If a normal user is assigned to project, an overview of all assigned projects can be viewed under <a
+        href="{% url 'projects' %}">Assigned Projects</a>. There you can choose which project to work on.</p>
+<h4>Ranking requirements</h4><figure class="explanation-pic"><a target="_blank" href="{% static 'pics/rank_requirements.png' %}"><img class="explanation-pic"
+                                                                                         src="{% static 'pics/rank_requirements.png' %}"></a><figcaption><i>Ranking of requirements</i></figcaption></figure>
+<p>The key activity of normal users is ranking the requirements given for the active project. <a
+        href="{% url 'ranking' %}">Ranking</a> provides an overview of the requirements to rank. To start the ranking
+    process head to <a href="{% url 'rank_requirements' %}">Rank Requirements</a>. If you have already specified a
+    ranking, it will be displayed on the right side of the screen. Giving a new ranking changes the old one.</p>
+<p>There you first have to choose the criterion according to which you rank the requirements. Then, you specify a rank
+    for each of the requirements based on the criterion chosen. Keep in mind, that the ranking is positive. That means,
+    that a ranking according to importance the requirements from the most to the least important requirement ranks. On
+    the other side, a ranking based on cost ranks the requirements from the least to the most costly requirement. The
+    ranks have consecutive, so it is not possible to have a ranking like 1-2-4-5. It is possible, to give the same rank
+    to different requirements, if you see them as equal. It is also possible, to rank requirements as unknown, in case
+    you do not know, how the requirement should be ranked according to the criterion and in regard to the other
+    requirements.</p>
+<h3>References</h3>
+<p>Pohl, K. (2010) Requirements Engineering: Fundamentals, Principles, and Techniques. 1st edn. Springer Publishing
+    Company, Incorporated. doi: <a href="https://www.springer.com/la/book/9783642125775">https://www.springer.com/la/book/9783642125775</a>.
+</p>
+<h4></h4>
+<p>Ładyżyński, P. and Grzegorzewski, P. (2015) ‘Vague preferences in recommender systems’, Expert Systems with
+    Applications, 42(24), pp. 9402–9411. doi: <a href="https://doi.org/10.1016/j.eswa.2015.08.006">https://doi.org/10.1016/j.eswa.2015.08.006</a>.
+</p>
+<p>Ye, J. (2010) ‘Fuzzy decision-making method based on the weighted correlation coefficient under intuitionistic fuzzy
+    environment’, European Journal of Operational Research, 205(1), pp. 202–204. doi: <a
+            href="https://doi.org/10.1016/j.ejor.2010.01.019">https://doi.org/10.1016/j.ejor.2010.01.019</a>.</p>
+<p>© Christian Born & Vasilis Gerogiannis</p>
+{% endblock %}

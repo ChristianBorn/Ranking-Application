@@ -1,0 +1,31 @@
+{% extends 'ranking_application/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Edit project{% endblock title %}
+{% url 'home' as url%}
+
+{% block pagetitle %}Edit requirement{% endblock %}
+{% block sidenav %}
+      <div class="col-sm-2 sidenav">
+      <h4>Subnavigation projects</h4>
+      <ul class="nav nav-pills nav-stacked">
+        <li class=""><a href="{% url 'requirements_create' %}">Create new requirement</a></li>
+      </ul>
+    </div>
+{% endblock %}
+{% block content %}
+<form action="{% url 'edit_requirement' requirement_id %}" method="POST">{% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="form-group">
+        {{ form.project_title.errors }}
+        <label for="{{ form.requirement_title.id_for_label }}">Requirement title: </label>
+        {% render_field form.requirement_title class="form-control" %}
+    </div>
+    <div class="form-group">
+        {{ form.project_description.errors }}
+        <label for="{{ form.requirement_description.id_for_label }}">Requirement description: </label>
+        {% render_field form.requirement_description class="form-control" rows="3" %}
+    </div>
+    <input type="submit" value="Save">
+</form>
+{% endblock content %}
