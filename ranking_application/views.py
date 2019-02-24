@@ -294,7 +294,6 @@ def final_ranking(request):
         categories = []
         for key in results_final_ranking.keys():
             categories.append(key.title)
-        print(categories)
         help_dict = {}
         counter = 0
         for user in assigned_users:
