@@ -235,17 +235,18 @@ def final_ranking(request):
                                                       project=request.user.app_user.active_project).order_by('rank')
             finished_rankings[user] = specific_ranking
         try:
-            for elem in finished_rankings:
+            for ranking_by_user in finished_rankings:
                 dict_to_dataframe = {'requ_name': [], 'requ_id': [], 'rank': [], 'membership': [],
                                      'non-membership': [], 'hesitation': []}
-                for elem2 in finished_rankings[elem]:
-                    dict_to_dataframe['requ_name'].append(elem2.ranked_requirement)
-                    dict_to_dataframe['requ_id'].append(elem2.ranked_requirement.id_in_project)
-                    dict_to_dataframe['rank'].append(elem2.rank)
+                for single_ranked_requirement in finished_rankings[ranking_by_user]:
+                    dict_to_dataframe['requ_name'].append(single_ranked_requirement.ranked_requirement)
+                    dict_to_dataframe['requ_id'].append(single_ranked_requirement.ranked_requirement.id_in_project)
+                    dict_to_dataframe['rank'].append(single_ranked_requirement.rank)
                     dict_to_dataframe['membership'].append(0)
                     dict_to_dataframe['non-membership'].append(0)
                     dict_to_dataframe['hesitation'].append(0)
-                df = pandas.DataFrame(data=dict_to_dataframe, columns=dict_to_dataframe.keys())
+                df = pandas.DataFrame(data=dict_to_dataframe, index=[x for x in range(len(dict_to_dataframe['requ_name']))],
+                                      columns=dict_to_dataframe.keys())
                 dataframes.append(df)
             for dataframe in dataframes:
                 dataframe['membership'] = dataframe['rank'].apply(calculate_membership,
@@ -273,14 +274,14 @@ def final_ranking(request):
                 second_step = 0
                 for y in range(len(dataframes)):
                     if first_step == 0:
-                        first_step = weights[y] * dataframes[y].iloc[x, 3]
+                        first_step = weights[y] * dataframes[y].at[x, 'membership']
                     else:
-                        first_step = first_step + weights[y] * dataframes[y].iloc[x, 3]
+                        first_step = first_step + weights[y] * dataframes[y].at[x, 'membership']
                     if second_step == 0:
-                        second_step = weights[y] * ((dataframes[y].iloc[x, 3] ** 2) + (dataframes[y].iloc[x,4] ** 2))
+                        second_step = weights[y] * ((dataframes[y].at[x, 'membership'] ** 2) + (dataframes[y].at[x, 'non-membership'] ** 2))
                     else:
                         second_step = second_step + weights[y] * \
-                                                    ((dataframes[y].iloc[x, 3] ** 2) + (dataframes[y].iloc[x, 4] ** 2))
+                                                    ((dataframes[y].at[x, 'membership'] ** 2) + (dataframes[y].at[x, 'non-membership'] ** 2))
                 third_step = math.sqrt(second_step)
                 if first_step == 0.0 and third_step == 0.0:
                     result = 0.0
