@@ -9,6 +9,7 @@ import pandas
 import math
 from . import helpers
 from decimal import Decimal
+import json
 
 
 # Todo: Bootstrap & Jquery runterladen
@@ -295,6 +296,8 @@ def final_ranking(request):
         categories = []
         for key in results_final_ranking.keys():
             categories.append(key.title)
+        # Transforming the category list into json for safer processing in highcharts.js
+        categories = json.dumps(categories)
         help_dict = {}
         counter = 0
         for user in assigned_users:
