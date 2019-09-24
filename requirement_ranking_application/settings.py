@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import json
+with open('config.json', 'r') as file:
+    config = json.load(file)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +23,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9s(2^7zb8yv(3vbf=bgyl16=$-r(dx)csto+)kb@xkh5i(ap5p'
+SECRET_KEY = config['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if not config['DEBUG']:
+    DEBUG = False
+else:
+    DEBUG = bool(config['DEBUG'])
 
-ALLOWED_HOSTS = ['127.0.0.1', 'sprint.teilar.gr']
+ALLOWED_HOSTS = config['ALLOWED_HOSTS']
 
 
 # Application definition
@@ -78,9 +84,9 @@ WSGI_APPLICATION = 'requirement_ranking_application.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'main_data_requirements',
-        'USER': 'chris',
-        'PASSWORD': '3kD>_r?pmY!3qkv',
+        'NAME': config['DB_NAME'],
+        'USER': config['DB_USER'],
+        'PASSWORD': config['DB_PASSWORD'],
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
