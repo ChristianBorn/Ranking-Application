@@ -366,9 +366,11 @@ def rank_requirements(request):
                     active_project = project.objects.get(pk=request.user.app_user.active_project_id)
                 except ObjectDoesNotExist:
                     active_project = ''
+                # Iterate over the dict with the rankings, key=Primary key of ranked requirement, value=specified rank
                 for elem in ranks:
                     requ = requirement.objects.get(pk=elem)
                     existing_ranking = ranking.objects.filter(ranked_requirement=elem, ranked_by=request.user.app_user)
+                    # Check, if a ranking already exists
                     if not existing_ranking:
                         new_ranking = ranking()
                         new_ranking.ranked_requirement = requ
