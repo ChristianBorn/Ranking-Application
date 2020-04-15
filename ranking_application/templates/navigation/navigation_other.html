@@ -1,0 +1,29 @@
+{% block navigation %}
+{% url view_name as url %}
+
+
+<nav class="navbar border-bottom mb-2 navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'home' %}">Fuzzy-Prio</a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navbarCollapse" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'projects' %}">RP-Projects</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Rankings</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'ranking' %}">Overview</a>
+                <div class="dropdown-divider"> </div>
+                <a class="dropdown-item" href="{% url 'rank_requirements' %}">Start ranking</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="{% url 'explanation' %}">User Guide</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endblock %}
