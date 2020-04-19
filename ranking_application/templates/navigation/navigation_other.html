@@ -17,13 +17,18 @@
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="{% url 'ranking' %}">Overview</a>
                 <div class="dropdown-divider"> </div>
-                <a class="dropdown-item" href="{% url 'rank_requirements' %}">Start ranking</a>
+                <a class="dropdown-item" href="{% url 'projects_create' %}">Create Project</a>
               </div>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link" href="{% url 'explanation' %}">User Guide</a>
             </li>
         </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+        </li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul>
     </div>
 </nav>
 {% endblock %}

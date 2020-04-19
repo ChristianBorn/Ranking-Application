@@ -1,39 +1,54 @@
 {% block navigation %}
 {% url view_name as url %}
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{% url 'projects' %}">Fuzzy-Prio</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li {% if '/projects/' in request.path %}class="active" {% endif %}><a href="{% url 'projects' %}">RP-Projects</a></li>
-        <li {% if '/requirements/' in request.path %}class="active" {% endif %}><a href="{% url 'requirements' %}" >Requirements</a></li>
-        <li {% if '/users/' in request.path %}class="active" {% endif %}><a href="{% url 'users' %}">Users</a></li>
-        <li {% if '/ranking/' in request.path %}class="active" {% endif %}><a href="{% url 'ranking' %}">Ranking</a></li>
-        <li {% if '/explanation/' in request.path %}class="active" {% endif %}><a href="{% url 'explanation' %}">User Guide</a></li>
-      </ul>
+<nav class="navbar border-bottom mb-2 navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'home' %}">Fuzzy-Prio</a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navbarCollapse" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">RP-Projects</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'projects' %}">Overview</a>
+                <div class="dropdown-divider"> </div>
+                <a class="dropdown-item" href="{% url 'projects_create' %}">Create new project</a>
+              </div>
+            </li>
+          <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Requirements</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'projects' %}">Overview</a>
+                <div class="dropdown-divider"> </div>
+                <a class="dropdown-item" href="{% url 'requirements_create' %}">Create requirements</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Users</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'users' %}">Overview</a>
+                <div class="dropdown-divider"> </div>
+                <a class="dropdown-item" href="{% url 'users_assign' %}">Assign users</a>
+              </div>
+            </li>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Rankings</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'ranking' %}">Overview</a>
+                <div class="dropdown-divider"> </div>
+                <a class="dropdown-item" href="{% url 'rank_requirements' %}">Start ranking</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="{% url 'explanation' %}">User Guide</a>
+            </li>
+        </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <!--<form class="form-inline" action="change_project" method="post">-->
-            <!--<select class="form-control selectpicker" data-live-search="true" onchange="this.form.submit" id="project_switch" name="project_switch">-->
-              <!--<option>{% if not request.session.project %}No active project{% endif %}</option>-->
-              <!--{% for project in user.app_user.project_owned_by.project %}-->
-                <!--<option>{{project.title}}</option>-->
-              <!--{% endfor %}-->
-              <!--<option>basfd</option>-->
-            <!--</select>-->
-          <!--</form>-->
         </li>
         <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
       </ul>
     </div>
-  </div>
 </nav>
 {% endblock %}

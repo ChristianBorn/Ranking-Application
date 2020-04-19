@@ -123,3 +123,6 @@
     float: right;
     margin-left: 10px;
 }
+.navbar-right {
+    margin-left: auto;
+}
