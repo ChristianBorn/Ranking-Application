@@ -17,6 +17,8 @@ import json
 def home(request):
     try:
         active_project = project.objects.get(pk=request.user.app_user.active_project_id)
+        # Set project title for indicator
+        request.session['active_project'] = active_project.title
     except AttributeError:
         active_project = ''
     if request.user.is_authenticated:
@@ -37,6 +39,7 @@ def projects(request):
         if request.user.app_user.active_project_id:
             try:
                 active_project = project.objects.get(pk=request.user.app_user.active_project_id)
+
             except ObjectDoesNotExist:
                 active_project = ''
         else:
@@ -478,6 +481,7 @@ def create_new_requirement(request):
 
 def change_active_project(request, project_id):
     app_user.objects.filter(pk=request.user.app_user.pk).update(active_project=project_id)
+    # Change active project
     request.session['active_project'] = project.objects.get(pk=project_id).title
     if request.user.is_authenticated:
         return redirect('projects')
