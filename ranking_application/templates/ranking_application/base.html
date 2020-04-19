@@ -23,11 +23,18 @@
 
 {% if user.is_authenticated %}
     {% block navigation %}
-        {% if user.app_user.get_role == 'PM' %}
-        {% include "navigation/navigation_pm.html" %}
-        {% else %}
-        {% include "navigation/navigation_other.html" %}
-        {% endif %}
+        <nav class="navbar border-bottom mb-2 navbar-expand-md navbar-light bg-light">
+            {% if user.app_user.get_role == 'PM' %}
+            {% include "navigation/navigation_pm.html" %}
+            {% else %}
+            {% include "navigation/navigation_other.html" %}
+            {% endif %}
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
+                </li>
+            </ul>
+        </nav>
     {% endblock %}
 {% endif %}
 <!-- Modal -->

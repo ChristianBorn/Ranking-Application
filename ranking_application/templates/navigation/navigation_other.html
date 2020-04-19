@@ -2,7 +2,7 @@
 {% url view_name as url %}
 
 
-<nav class="navbar border-bottom mb-2 navbar-expand-md navbar-light bg-light">
+
     <a class="navbar-brand" href="{% url 'home' %}">Fuzzy-Prio</a>
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
@@ -24,11 +24,6 @@
               <a class="nav-link" href="{% url 'explanation' %}">User Guide</a>
             </li>
         </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-        </li>
-        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-      </ul>
     </div>
-</nav>
+
 {% endblock %}
