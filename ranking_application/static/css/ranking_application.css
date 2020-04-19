@@ -48,12 +48,9 @@
 }
 
 .project-indicator {
-    position: absolute;
-    right: 1%;
-    top: 13%;
-    padding: 10px;
+    font-weight: bold;
     border: 1px solid #228B22;
-    border-left: 5px solid #228B22;
+    border-right: 5px solid #228B22;
 }
   #unordered{
     border: 1px solid black;
@@ -122,7 +119,4 @@
     max-width: 700px;
     float: right;
     margin-left: 10px;
-}
-.navbar-right {
-    margin-left: auto;
 }

@@ -30,9 +30,16 @@
             {% include "navigation/navigation_other.html" %}
             {% endif %}
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
+                {% if request.session.active_project %}
+                 <li class="nav-item project-indicator">
+                    <a href="{% url 'projects' %}" class="nav-link"> {{request.session.active_project}}</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item logout">
+                    <a href="{% url 'logout' %}" class="nav-link"> Logout</a>
                 </li>
+
+
             </ul>
         </nav>
     {% endblock %}
@@ -42,9 +49,6 @@
 <div class="container-fluid ">
   <div class="row content">
 
-    {% if request.session.active_project %}
-        <aside class="project-indicator">{{request.session.active_project}}</aside>
-        {% endif %}
       <div class="col-sm-10">
       <h3>{% block pagetitle %}{% endblock %}</h3>
 
